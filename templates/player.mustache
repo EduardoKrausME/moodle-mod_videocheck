@@ -1,0 +1,87 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_videocheck/player
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+<div id="{{rootid}}" class="videocheck">
+    <div class="videocheck-summary mb-3" aria-live="polite">
+        <div>
+            <strong>{{#str}}watched, videocheck{{/str}}:</strong>
+            <span data-region="percent">{{percent}}</span>%
+        </div>
+        {{#hascheckpoints}}
+            <div>
+                <strong>{{#str}}checkpoints, videocheck{{/str}}:</strong>
+                <span data-region="completed-count">{{completedcount}}</span>
+                {{#str}}of, videocheck{{/str}}
+                <span data-region="total-count">{{totalcount}}</span>
+            </div>
+        {{/hascheckpoints}}
+    </div>
+
+    <div class="videocheck-stage position-relative">
+        {{#ishtml5}}
+            <video id="{{playerid}}" class="videocheck-video" controls preload="metadata"
+                   {{#posterurl}}poster="{{posterurl}}"{{/posterurl}}>
+                <source src="{{{videourl}}}">
+                {{#str}}videonotsupported, videocheck{{/str}}
+            </video>
+        {{/ishtml5}}
+
+        {{#isyoutube}}
+            <div id="{{playerid}}" class="videocheck-embed" data-youtube-id="{{youtubeid}}"></div>
+        {{/isyoutube}}
+
+        {{#isvimeo}}
+            <iframe id="{{playerid}}" class="videocheck-embed"
+                    src="{{{vimeoembed}}}" allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen title="{{#str}}videoplayer, videocheck{{/str}}"></iframe>
+        {{/isvimeo}}
+
+        <div class="videocheck-checkpoint card shadow" data-region="checkpoint-panel" hidden>
+            <div class="card-body">
+                <h4 class="card-title" data-region="checkpoint-title"></h4>
+                <p class="card-text" data-region="checkpoint-prompt"></p>
+
+                <div class="mb-3" data-region="text-response">
+                    <label class="form-label" for="{{rootid}}-response">{{#str}}yourresponse, videocheck{{/str}}</label>
+                    <input id="{{rootid}}-response" type="text" class="form-control" data-region="response-input">
+                </div>
+
+                <div class="mb-3" data-region="choice-response" hidden>
+                    <label class="form-label" for="{{rootid}}-choice">{{#str}}chooseoption, videocheck{{/str}}</label>
+                    <select id="{{rootid}}-choice" class="form-select" data-region="response-choice"></select>
+                </div>
+
+                <div class="alert alert-danger py-2" data-region="checkpoint-error" hidden></div>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-primary" data-action="submit-checkpoint"></button>
+                    <button type="button" class="btn btn-secondary" data-action="skip-checkpoint"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{^cantrack}}
+        <div class="alert alert-info mt-3">{{#str}}previewmode, videocheck{{/str}}</div>
+    {{/cantrack}}
+</div>
