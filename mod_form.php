@@ -47,7 +47,7 @@ class mod_videocheck_mod_form extends moodleform_mod {
         $mform->addRule('name', null, 'required', null, 'client');
         $this->standard_intro_elements();
 
-        $mform->addElement('header', 'videosettings', get_string('videosettings', 'videocheck'));
+        $mform->addElement('html', '<h3>' . get_string('videosettings', 'videocheck') . '</h3>');
         $mform->addElement('select', 'videosource', get_string('videosource', 'videocheck'), [
             'upload' => get_string('sourceupload', 'videocheck'),
             'url' => get_string('sourceurl', 'videocheck'),
@@ -58,7 +58,6 @@ class mod_videocheck_mod_form extends moodleform_mod {
 
         $videooptions = [
             'subdirs' => 0,
-            'maxfiles' => 1,
             'accepted_types' => ['video'],
         ];
         $mform->addElement('filemanager', 'videofile', get_string('videofile', 'videocheck'), null, $videooptions);
@@ -81,13 +80,12 @@ class mod_videocheck_mod_form extends moodleform_mod {
 
         $posteroptions = [
             'subdirs' => 0,
-            'maxfiles' => 1,
             'accepted_types' => ['image'],
         ];
         $mform->addElement('filemanager', 'poster', get_string('poster', 'videocheck'), null, $posteroptions);
         $mform->hideIf('poster', 'videosource', 'in', ['youtube', 'vimeo']);
 
-        $mform->addElement('header', 'playbacksettings', get_string('playbacksettings', 'videocheck'));
+        $mform->addElement('html', '<h3>' . get_string('playbacksettings', 'videocheck') . '</h3>');
         $mform->addElement('selectyesno', 'resumeplayback', get_string('resumeplayback', 'videocheck'));
         $mform->setDefault('resumeplayback', 1);
         $mform->addHelpButton('resumeplayback', 'resumeplayback', 'videocheck');
@@ -96,7 +94,7 @@ class mod_videocheck_mod_form extends moodleform_mod {
         $mform->setDefault('allowseek', 1);
         $mform->addHelpButton('allowseek', 'allowseek', 'videocheck');
 
-        $mform->addElement('header', 'checkpointcompletion', get_string('checkpointcompletion', 'videocheck'));
+        $mform->addElement('html', '<h3>' . get_string('checkpointcompletion', 'videocheck') . '</h3>');
         $mform->addElement('select', 'completionmode', get_string('completionmode', 'videocheck'), [
             'all' => get_string('completionmodeall', 'videocheck'),
             'minimum' => get_string('completionmodeminimum', 'videocheck'),
@@ -226,6 +224,15 @@ class mod_videocheck_mod_form extends moodleform_mod {
         }
         if (($data['completionmode'] ?? '') === 'minimum' && (int)($data['completionminimum'] ?? 0) < 1) {
             $errors['completionminimum'] = get_string('completionminimumerror', 'videocheck');
+        }
+        foreach (['videofile', 'poster'] as $field) {
+            $draftid = (int)($data[$field] ?? 0);
+            if ($draftid > 0) {
+                $draftinfo = file_get_draft_area_info($draftid);
+                if ((int)$draftinfo['filecount'] > 1) {
+                    $errors[$field] = get_string('errormaxfiles', 'videocheck');
+                }
+            }
         }
         return $errors;
     }
