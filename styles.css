@@ -38,3 +38,17 @@
 .videocheck-checkpoint[hidden] {
     display: none !important;
 }
+/* Let the main player use the full activity content width. */
+.videocheck {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+}
+
+.videocheck-stage > iframe {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
+}
