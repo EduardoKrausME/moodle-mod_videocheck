@@ -119,7 +119,7 @@ class progress_manager {
      * @throws moodle_exception
      */
     public function update(stdClass $activity, cm_info|stdClass $cm, int $userid, float $position, float $duration,
-                           string   $segmentsjson, float $watchtime): array {
+                           string $segmentsjson, float $watchtime): array {
         global $DB;
 
         $duration = max(0.0, min(86400.0, $duration));
