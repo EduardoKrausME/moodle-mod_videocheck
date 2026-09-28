@@ -1,0 +1,199 @@
+{{!
+    @template mod_videocheck/report
+}}
+<div class="videocheck-report">
+    <div class="mb-3">
+        <a href="{{backurl}}" class="btn btn-outline-secondary">{{#str}}backtoactivity, videocheck{{/str}}</a>
+    </div>
+
+    <h3 class="h5 mb-3">{{#str}}reportoverview, videocheck{{/str}}</h3>
+
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-lg-3">
+            <div class="card videocheck-report-stat">
+                <div class="card-body">
+                    <div class="text-muted small">{{#str}}participants, videocheck{{/str}}</div>
+                    <div class="fs-3 fw-semibold">{{participantcount}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="card videocheck-report-stat">
+                <div class="card-body">
+                    <div class="text-muted small">{{#str}}started, videocheck{{/str}}</div>
+                    <div class="fs-3 fw-semibold">{{startedcount}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="card videocheck-report-stat">
+                <div class="card-body">
+                    <div class="text-muted small">{{#str}}statuscompleted, videocheck{{/str}}</div>
+                    <div class="fs-3 fw-semibold">{{completedusers}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="card videocheck-report-stat">
+                <div class="card-body">
+                    <div class="text-muted small">{{#str}}averagewatched, videocheck{{/str}}</div>
+                    <div class="fs-3 fw-semibold">{{averagewatched}}%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="text-muted small mb-1">{{#str}}totalwatchtime, videocheck{{/str}}</div>
+                    <div class="fs-4 fw-semibold">{{totalwatchtime}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between gap-3 mb-2">
+                        <div class="text-muted small">{{#str}}checkpointprogress, videocheck{{/str}}</div>
+                        <div class="small">{{completedcheckpointcount}} / {{checkpointpossible}}</div>
+                    </div>
+                    <div class="progress" role="progressbar" aria-valuenow="{{checkpointpercent}}" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" style="width: {{checkpointpercent}}%">{{checkpointpercent}}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="h5 mb-3">{{#str}}learnerprogress, videocheck{{/str}}</h3>
+
+    {{^hasrows}}
+        <div class="alert alert-info">{{#str}}noreportparticipants, videocheck{{/str}}</div>
+    {{/hasrows}}
+
+    {{#hasrows}}
+        <div class="table-responsive mb-4">
+            <table class="table table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">{{#str}}student, videocheck{{/str}}</th>
+                        <th scope="col">{{#str}}watchedpercent, videocheck{{/str}}</th>
+                        <th scope="col">{{#str}}completedcheckpoints, videocheck{{/str}}</th>
+                        <th scope="col">{{#str}}watchtime, videocheck{{/str}}</th>
+                        <th scope="col">{{#str}}lastaccess, videocheck{{/str}}</th>
+                        <th scope="col">{{#str}}status, videocheck{{/str}}</th>
+                        <th scope="col">{{#str}}actions{{/str}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#rows}}
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="videocheck-report-avatar">{{{avatar}}}</span>
+                                    <div>
+                                        <div class="fw-semibold">{{fullname}}</div>
+                                        <div class="small text-muted">{{email}}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="progress" role="progressbar" aria-valuenow="{{progressvalue}}" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: {{progressvalue}}%">{{percent}}%</div>
+                                </div>
+                            </td>
+                            <td>{{completed}} / {{totalcheckpoints}}</td>
+                            <td>{{watchtime}}</td>
+                            <td>{{lastaccess}}</td>
+                            <td><span class="badge {{statusclass}}">{{status}}</span></td>
+                            <td class="text-nowrap">
+                                <a href="{{detailurl}}" class="btn btn-sm btn-outline-primary">{{#str}}details, videocheck{{/str}}</a>
+                                {{#canreset}}
+                                    <a href="{{reseturl}}" class="btn btn-sm btn-outline-danger">{{#str}}resetprogress, videocheck{{/str}}</a>
+                                {{/canreset}}
+                            </td>
+                        </tr>
+                    {{/rows}}
+                </tbody>
+            </table>
+        </div>
+    {{/hasrows}}
+
+    {{#details}}
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <span class="videocheck-report-avatar">{{{avatar}}}</span>
+                    <div>
+                        <h3 class="h5 mb-1">{{fullname}}</h3>
+                        <div class="text-muted">{{email}}</div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-6 col-lg-3">
+                        <div class="border rounded p-3 h-100">
+                            <div class="small text-muted">{{#str}}watchedpercent, videocheck{{/str}}</div>
+                            <div class="fs-5 fw-semibold">{{percent}}%</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="border rounded p-3 h-100">
+                            <div class="small text-muted">{{#str}}watchtime, videocheck{{/str}}</div>
+                            <div class="fs-5 fw-semibold">{{watchtime}}</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="border rounded p-3 h-100">
+                            <div class="small text-muted">{{#str}}lastposition, videocheck{{/str}}</div>
+                            <div class="fs-5 fw-semibold">{{lastposition}}</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="border rounded p-3 h-100">
+                            <div class="small text-muted">{{#str}}lastaccess, videocheck{{/str}}</div>
+                            <div class="fw-semibold">{{lastaccess}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="h6">{{#str}}checkpoints, videocheck{{/str}}</h4>
+                {{^hascheckpoints}}
+                    <div class="alert alert-light border">{{#str}}nocheckpoints, videocheck{{/str}}</div>
+                {{/hascheckpoints}}
+                {{#hascheckpoints}}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">{{#str}}checkpoint, videocheck{{/str}}</th>
+                                    <th scope="col">{{#str}}position, videocheck{{/str}}</th>
+                                    <th scope="col">{{#str}}checkpointtype, videocheck{{/str}}</th>
+                                    <th scope="col">{{#str}}response, videocheck{{/str}}</th>
+                                    <th scope="col">{{#str}}attempts, videocheck{{/str}}</th>
+                                    <th scope="col">{{#str}}status, videocheck{{/str}}</th>
+                                    <th scope="col">{{#str}}completedat, videocheck{{/str}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#checkpoints}}
+                                    <tr>
+                                        <td>{{title}}</td>
+                                        <td>{{position}}</td>
+                                        <td>{{type}}</td>
+                                        <td>{{response}}</td>
+                                        <td>{{attempts}}</td>
+                                        <td><span class="badge {{statusclass}}">{{status}}</span></td>
+                                        <td>{{completedat}}</td>
+                                    </tr>
+                                {{/checkpoints}}
+                            </tbody>
+                        </table>
+                    </div>
+                {{/hascheckpoints}}
+            </div>
+        </div>
+    {{/details}}
+</div>

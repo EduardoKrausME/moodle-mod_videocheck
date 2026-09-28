@@ -158,3 +158,14 @@ $string['watched'] = 'Watched';
 $string['watchedpercent'] = 'Watched percentage';
 $string['yourresponse'] = 'Your response';
 $string['youtubeurl'] = 'YouTube URL';
+
+$string['averagewatched'] = 'Average watched';
+$string['checkpointprogress'] = 'Checkpoint progress';
+$string['learnerprogress'] = 'Learner progress';
+$string['lastposition'] = 'Last position';
+$string['noreportparticipants'] = 'There are no participants with permission to submit this activity and no stored progress yet.';
+$string['participants'] = 'Participants';
+$string['reportoverview'] = 'Overview';
+$string['started'] = 'Started';
+$string['totalwatchtime'] = 'Total watch time';
+$string['watchtime'] = 'Watch time';

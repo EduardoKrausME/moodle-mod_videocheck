@@ -54,3 +54,24 @@
 .videocheck-checkpoint[hidden] {
     display: none !important;
 }
+
+
+.videocheck-report .progress {
+    min-width: 9rem;
+    height: 1.25rem;
+}
+
+.videocheck-report .videocheck-report-avatar img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+}
+
+.videocheck-report .videocheck-report-stat {
+    min-height: 100%;
+}
+
+.videocheck-report .table td,
+.videocheck-report .table th {
+    vertical-align: middle;
+}

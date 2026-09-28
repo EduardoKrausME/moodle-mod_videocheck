@@ -156,3 +156,14 @@ $string['watched'] = 'Assistido';
 $string['watchedpercent'] = 'Percentual assistido';
 $string['yourresponse'] = 'Sua resposta';
 $string['youtubeurl'] = 'URL do YouTube';
+
+$string['averagewatched'] = 'Média assistida';
+$string['checkpointprogress'] = 'Progresso dos checkpoints';
+$string['learnerprogress'] = 'Progresso dos estudantes';
+$string['lastposition'] = 'Última posição';
+$string['noreportparticipants'] = 'Não há participantes com permissão para enviar esta atividade e ainda não existe progresso armazenado.';
+$string['participants'] = 'Participantes';
+$string['reportoverview'] = 'Visão geral';
+$string['started'] = 'Iniciaram';
+$string['totalwatchtime'] = 'Tempo total assistido';
+$string['watchtime'] = 'Tempo assistido';
