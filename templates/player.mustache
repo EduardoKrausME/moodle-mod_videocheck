@@ -19,7 +19,20 @@
 
     Example context (json):
     {
-        Aqui tem que criar o context em inglês
+        "rootid": "videocheck-root-12",
+        "playerid": "videocheck-media-12",
+        "ishtml5": true,
+        "isyoutube": false,
+        "isvimeo": false,
+        "videourl": "https://example.com/video.mp4",
+        "posterurl": "",
+        "youtubeid": "",
+        "vimeoembed": "",
+        "percent": "42.0",
+        "completedcount": 1,
+        "totalcount": 3,
+        "hascheckpoints": true,
+        "cantrack": true
     }
 }}
 <div id="{{rootid}}" class="videocheck">
@@ -38,24 +51,26 @@
         {{/hascheckpoints}}
     </div>
 
-    <div class="videocheck-stage position-relative">
-        {{#ishtml5}}
-            <video id="{{playerid}}" class="videocheck-video" controls preload="metadata"
-                   {{#posterurl}}poster="{{posterurl}}"{{/posterurl}}>
-                <source src="{{{videourl}}}">
-                {{#str}}videonotsupported, videocheck{{/str}}
-            </video>
-        {{/ishtml5}}
+    <div class="videocheck-stage">
+        <div class="videocheck-media">
+            {{#ishtml5}}
+                <video id="{{playerid}}" class="videocheck-video" controls preload="metadata"
+                       {{#posterurl}}poster="{{posterurl}}"{{/posterurl}}>
+                    <source src="{{videourl}}">
+                    {{#str}}videonotsupported, videocheck{{/str}}
+                </video>
+            {{/ishtml5}}
 
-        {{#isyoutube}}
-            <div id="{{playerid}}" class="videocheck-embed" data-youtube-id="{{youtubeid}}"></div>
-        {{/isyoutube}}
+            {{#isyoutube}}
+                <div id="{{playerid}}" class="videocheck-embed" data-youtube-id="{{youtubeid}}"></div>
+            {{/isyoutube}}
 
-        {{#isvimeo}}
-            <iframe id="{{playerid}}" class="videocheck-embed"
-                    src="{{{vimeoembed}}}" allow="autoplay; fullscreen; picture-in-picture"
-                    allowfullscreen title="{{#str}}videoplayer, videocheck{{/str}}"></iframe>
-        {{/isvimeo}}
+            {{#isvimeo}}
+                <iframe id="{{playerid}}" class="videocheck-embed"
+                        src="{{vimeoembed}}" allow="autoplay; fullscreen; picture-in-picture"
+                        allowfullscreen title="{{#str}}videoplayer, videocheck{{/str}}"></iframe>
+            {{/isvimeo}}
+        </div>
 
         <div class="videocheck-checkpoint card shadow" data-region="checkpoint-panel" hidden>
             <div class="card-body">

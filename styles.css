@@ -1,6 +1,7 @@
 .videocheck {
-    max-width: 1100px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
 }
 
 .videocheck-summary {
@@ -10,17 +11,30 @@
 }
 
 .videocheck-stage {
-    background: #111;
-    border-radius: .5rem;
+    position: relative;
+    width: 100%;
     overflow: hidden;
-    min-height: 220px;
+    border-radius: .5rem;
+    background: #111;
+}
+
+.videocheck-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
 }
 
 .videocheck-video,
-.videocheck-embed {
+.videocheck-embed,
+.videocheck-media > iframe {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 100%;
+    max-width: none;
     border: 0;
     background: #000;
 }
@@ -30,6 +44,8 @@
     inset: 50% auto auto 50%;
     transform: translate(-50%, -50%);
     width: min(92%, 620px);
+    max-height: calc(100% - 2rem);
+    overflow-y: auto;
     z-index: 10;
     background: var(--bs-body-bg, #fff);
     color: var(--bs-body-color, #212529);
@@ -37,18 +53,4 @@
 
 .videocheck-checkpoint[hidden] {
     display: none !important;
-}
-/* Let the main player use the full activity content width. */
-.videocheck {
-    width: 100%;
-    max-width: none;
-    margin-inline: 0;
-}
-
-.videocheck-stage > iframe {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    border: 0;
 }
