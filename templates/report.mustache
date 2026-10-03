@@ -3,7 +3,7 @@
 }}
 <div class="videocheck-report">
     <div class="mb-3">
-        <a href="{{backurl}}" class="btn btn-outline-secondary">{{#str}}backtoactivity, videocheck{{/str}}</a>
+        <a href="{{{backurl}}}" class="btn btn-outline-secondary">{{#str}}backtoactivity, videocheck{{/str}}</a>
     </div>
 
     <h3 class="h5 mb-3">{{#str}}reportoverview, videocheck{{/str}}</h3>
@@ -109,9 +109,9 @@
                             <td>{{lastaccess}}</td>
                             <td><span class="badge {{statusclass}}">{{status}}</span></td>
                             <td class="text-nowrap">
-                                <a href="{{detailurl}}" class="btn btn-sm btn-outline-primary">{{#str}}details, videocheck{{/str}}</a>
+                                <a href="{{{detailurl}}}" class="btn btn-sm btn-outline-primary">{{#str}}details, videocheck{{/str}}</a>
                                 {{#canreset}}
-                                    <a href="{{reseturl}}" class="btn btn-sm btn-outline-danger">{{#str}}resetprogress, videocheck{{/str}}</a>
+                                    <a href="{{{reseturl}}}" class="btn btn-sm btn-outline-danger">{{#str}}resetprogress, videocheck{{/str}}</a>
                                 {{/canreset}}
                             </td>
                         </tr>

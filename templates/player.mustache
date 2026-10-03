@@ -56,7 +56,7 @@
             {{#ishtml5}}
                 <video id="{{playerid}}" class="videocheck-video" controls preload="metadata"
                        {{#posterurl}}poster="{{posterurl}}"{{/posterurl}}>
-                    <source src="{{videourl}}">
+                    <source src="{{{videourl}}}">
                     {{#str}}videonotsupported, videocheck{{/str}}
                 </video>
             {{/ishtml5}}
@@ -67,7 +67,7 @@
 
             {{#isvimeo}}
                 <iframe id="{{playerid}}" class="videocheck-embed"
-                        src="{{vimeoembed}}" allow="autoplay; fullscreen; picture-in-picture"
+                        src="{{{vimeoembed}}}" allow="autoplay; fullscreen; picture-in-picture"
                         allowfullscreen title="{{#str}}videoplayer, videocheck{{/str}}"></iframe>
             {{/isvimeo}}
         </div>
