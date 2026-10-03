@@ -24,7 +24,7 @@
 
 use mod_videocheck\source_manager;
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 global $CFG;
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
