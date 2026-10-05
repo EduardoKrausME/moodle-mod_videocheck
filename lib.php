@@ -225,7 +225,11 @@ function videocheck_get_file_areas($course, $cm, $context): array {
 function videocheck_get_coursemodule_info($coursemodule) {
     global $DB;
 
-    $activity = $DB->get_record('videocheck', ['id' => $coursemodule->instance], 'id,name,intro,introformat');
+    $activity = $DB->get_record(
+        'videocheck',
+        ['id' => $coursemodule->instance],
+        'id,name,intro,introformat,completioncheckpoints'
+    );
     if (!$activity) {
         return null;
     }
@@ -233,6 +237,9 @@ function videocheck_get_coursemodule_info($coursemodule) {
     $info->name = $activity->name;
     if ($coursemodule->showdescription) {
         $info->content = format_module_intro('videocheck', $activity, $coursemodule->id, false);
+    }
+    if ($coursemodule->completion == COMPLETION_TRACKING_AUTOMATIC) {
+        $info->customdata['customcompletionrules']['completioncheckpoints'] = $activity->completioncheckpoints;
     }
     return $info;
 }
