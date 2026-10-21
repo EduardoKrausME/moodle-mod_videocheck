@@ -216,6 +216,6 @@ class checkpoint_manager {
         if ($expected === '') {
             return true;
         }
-        return \core_text::strtolower($response) === \core_text::strtolower($expected);
+        return strtolower($response) === strtolower($expected);
     }
 }
