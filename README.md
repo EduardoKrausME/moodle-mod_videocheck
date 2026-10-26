@@ -17,11 +17,6 @@ The report shows, per student, watched percentage, completed and pending checkpo
 - Moodle 4.4 or later.
 - PHP supported by the installed Moodle version.
 
-## Installation
-
-Copy the `videocheck` directory to `mod/videocheck`, visit Site administration > Notifications, and complete the Moodle
-upgrade.
-
 ## Video sources
 
 - Uploaded video through Moodle File API.
